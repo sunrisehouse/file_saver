@@ -18,4 +18,4 @@ class FileSaver:
                 fp.write(contents)
             return { "filename": file.filename }
         
-        uvicorn.run(app, host=host, port=port)
+        uvicorn.run(app, host=host, port=int(port))
