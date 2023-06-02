@@ -1,9 +1,10 @@
 import os
 
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import FastAPI, Form, UploadFile
+import uvicorn
 
 class FileSaver:
-    def __init__(self, upload_directory):
+    def __init__(self, host, port, upload_directory):
         app = FastAPI()
 
         @app.get("/")
@@ -16,3 +17,5 @@ class FileSaver:
             with open(os.path.join(upload_directory + key, file.filename), "wb") as fp:
                 fp.write(contents)
             return { "filename": file.filename }
+        
+        uvicorn.run(app, host=host, port=port)
